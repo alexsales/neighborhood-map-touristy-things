@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import classes from './Search.module.css';
 
 const Search = props => {
   return (
-    <Fragment>
+    <div className={classes.Search}>
       <input type='text' />
-    </Fragment>
+    </div>
   );
 };
 

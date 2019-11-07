@@ -7,11 +7,17 @@ const MapBG = props => {
     height: '100%'
   };
 
+  const mapWrapperStyles = {
+    height: 'calc(100% - 60px)',
+    zIndex: '-100'
+  };
+
   return (
     <Map
       google={props.google}
       zoom={13}
       style={mapStyles}
+      containerStyle={mapWrapperStyles}
       initialCenter={{ lat: 34.1020231, lng: -118.3409712 }}
     />
   );

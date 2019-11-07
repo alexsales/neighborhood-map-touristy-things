@@ -1,10 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import classes from './Toolbar.module.css';
 
-export default function Toolbar() {
+const Toolbar = props => {
   return (
-    <Fragment>
-      <div>Login</div>
-      <div>Register</div>
-    </Fragment>
+    <ul className={classes.Toolbar}>
+      <li>
+        <NavLink to='/auth'>Login</NavLink>
+      </li>
+      <li>
+        <NavLink to='/register'>Register</NavLink>
+      </li>
+    </ul>
   );
-}
+};
+
+export default Toolbar;

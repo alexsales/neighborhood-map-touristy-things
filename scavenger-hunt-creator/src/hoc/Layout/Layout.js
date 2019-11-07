@@ -3,12 +3,15 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import Search from '../../components/Search/Search';
 import MapBG from '../../components/UI/MapBG/MapBG';
 
-export default function Layout() {
+const Layout = props => {
   return (
     <Fragment>
       <Toolbar />
       <Search />
       <MapBG />
+      {props.children}
     </Fragment>
   );
-}
+};
+
+export default Layout;

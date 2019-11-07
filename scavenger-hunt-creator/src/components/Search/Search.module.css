@@ -1,0 +1,12 @@
+.Search {
+  width: calc(65% + 20px);
+  margin: 0 auto;
+}
+
+.Search input {
+  width: 65%;
+  padding: 10px;
+  position: absolute;
+  top: 40%;
+  font-size: 1.5em;
+}
