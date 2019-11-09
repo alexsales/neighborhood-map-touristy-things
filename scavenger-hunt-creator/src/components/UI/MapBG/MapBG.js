@@ -1,5 +1,6 @@
 import React from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { connect } from 'react-redux';
 
 const MapBG = props => {
   const mapStyles = {
@@ -12,17 +13,43 @@ const MapBG = props => {
     zIndex: '-100'
   };
 
+  const displayMarkers = () => {
+    return props.initPlaces.map((placeObj, index) => {
+      return (
+        <Marker
+          key={index}
+          id={index}
+          position={{
+            lat: placeObj.lat,
+            lng: placeObj.lng
+          }}
+          onClick={() => console.log('marker clicked')}
+        />
+      );
+    });
+  };
+
   return (
     <Map
       google={props.google}
       zoom={13}
       style={mapStyles}
       containerStyle={mapWrapperStyles}
-      initialCenter={{ lat: 34.1020231, lng: -118.3409712 }}
-    />
+      initialCenter={props.initCenter}>
+      {displayMarkers()}
+    </Map>
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA'
-})(MapBG);
+const mapStateToProps = state => {
+  return {
+    initPlaces: state.mapReduce.initialPlaces,
+    initCenter: state.mapReduce.initialCenter
+  };
+};
+
+export default connect(mapStateToProps)(
+  GoogleApiWrapper({
+    apiKey: 'AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA'
+  })(MapBG)
+);
