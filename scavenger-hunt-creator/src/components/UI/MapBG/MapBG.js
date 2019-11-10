@@ -35,7 +35,8 @@ const MapBG = props => {
       zoom={13}
       style={mapStyles}
       containerStyle={mapWrapperStyles}
-      initialCenter={props.initCenter}>
+      initialCenter={props.initCenter}
+      center={props.center}>
       {displayMarkers()}
     </Map>
   );
@@ -44,7 +45,8 @@ const MapBG = props => {
 const mapStateToProps = state => {
   return {
     initPlaces: state.mapReduce.initialPlaces,
-    initCenter: state.mapReduce.initialCenter
+    initCenter: state.mapReduce.initialCenter,
+    center: state.mapReduce.mapCenter
   };
 };
 

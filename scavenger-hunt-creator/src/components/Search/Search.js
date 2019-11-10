@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { instanceGeocode } from '../../axios';
 import classes from './Search.module.css';
 
 const Search = props => {
@@ -22,7 +23,7 @@ const Search = props => {
 
 const mapStateToProps = state => {
   return {
-    center: state.mapReduce.mapCenter,
+    center: state.mapReduce.searchText,
     searchClicked: state.mapReduce.searchboxClicked
   };
 };
@@ -42,9 +43,23 @@ const mapDispatchToProps = dispatch => {
     },
     onCheckEntered: event => {
       if (event.key === 'Enter' || event.key === 'ENTER') {
-        dispatch({
-          type: 'UPDATEMAP'
-        });
+        // use axios to get lat/lng of searchText, then pass as payload
+        const queryParams =
+          '/json?address=90004&key=AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA';
+        instanceGeocode
+          .get(queryParams)
+          .then(response => {
+            console.log('response: ', response);
+            dispatch({
+              type: 'UPDATEMAP'
+            });
+          })
+          .catch(error => {
+            console.log('error: ', error);
+            dispatch({
+              type: 'UPDATEMAPFAILED'
+            });
+          });
       }
     }
   };
