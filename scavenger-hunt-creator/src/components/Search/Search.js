@@ -9,7 +9,7 @@ const Search = props => {
       <input
         type='text'
         onChange={props.onSetCenter}
-        onKeyPress={props.onCheckEntered}
+        onKeyPress={event => props.onCheckEntered(event, props.center)}
         onClick={() => {
           if (!props.searchClicked) {
             props.onSearchClicked();
@@ -41,17 +41,21 @@ const mapDispatchToProps = dispatch => {
         type: 'SEARCHCLICKED'
       });
     },
-    onCheckEntered: event => {
-      if (event.key === 'Enter' || event.key === 'ENTER') {
+    onCheckEntered: (evt, cntr) => {
+      if (evt.key === 'Enter' || evt.key === 'ENTER') {
         // use axios to get lat/lng of searchText, then pass as payload
         const queryParams =
-          '/json?address=90004&key=AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA';
+          '/json?address=' +
+          cntr +
+          '&key=AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA';
+
         instanceGeocode
           .get(queryParams)
           .then(response => {
-            console.log('response: ', response);
+            // console.log('response: ', response);
             dispatch({
-              type: 'UPDATEMAP'
+              type: 'UPDATEMAP',
+              payload: response
             });
           })
           .catch(error => {

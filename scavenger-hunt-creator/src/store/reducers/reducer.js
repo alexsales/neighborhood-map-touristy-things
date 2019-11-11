@@ -28,9 +28,18 @@ const reducer = (state = initialState, action) => {
         searchboxClicked: true
       };
     case 'UPDATEMAP':
-      console.log('get lat/lng');
       // access lat/lng from action.payload and then update mapCenter
-      return state;
+      const updatedMapCenter = {
+        lat: action.payload.data.results[0].geometry.location.lat,
+        lng: action.payload.data.results[0].geometry.location.lng
+      };
+      return {
+        ...state,
+        mapCenter: {
+          ...state.mapCenter,
+          ...updatedMapCenter
+        }
+      };
     default:
       return state;
   }
