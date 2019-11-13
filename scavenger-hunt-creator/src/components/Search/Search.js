@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => {
       if (evt.key === 'Enter' || evt.key === 'ENTER') {
         // use axios to get lat/lng of searchText, then pass as payload
         const queryParams =
-          '/json?address=' +
+          '/geocode/json?address=' +
           cntr +
           '&key=AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA';
 

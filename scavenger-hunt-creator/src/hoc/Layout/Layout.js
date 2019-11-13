@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import Search from '../../components/Search/Search';
-import MapBG from '../../components/UI/MapBG/MapBG';
+import MapBGNoLibrary from '../../components/UI/MapBGNoLibrary/MapBGNoLibrary.js';
 
 const Layout = props => {
   return (
     <Fragment>
       <Toolbar />
       <Search />
-      <MapBG />
+      <MapBGNoLibrary />
       {props.children}
     </Fragment>
   );
