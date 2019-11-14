@@ -24,3 +24,8 @@
 .gm-style .gm-style-iw-t::after {
   display: none;
 }
+
+.gm-style-iw {
+  height: 275px;
+  width: 200px;
+}
