@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 const PlacesBG = props => {
   const onLoad = () => {
     const placeLocation = new window.google.maps.LatLng(props.center);
-    let infoWindowActive = null;
-    const request = {
+    const service = new window.google.maps.places.PlacesService(props.map);
+
+    const businessTypes = ['art_gallery', 'book_store', 'cafe', 'museum'];
+
+    let request = {
       location: placeLocation,
       radius: '500',
-      type: 'tourist_attraction'
+      type: ''
     };
+    let infoWindowActive = null;
 
     const createMarker = (place, index) => {
       const marker = new window.google.maps.Marker({
@@ -34,8 +38,6 @@ const PlacesBG = props => {
               image: place.photos[0].getUrl()
             };
 
-            window.google.maps.event.clearListeners(marker, 'click');
-
             infowindow.setContent(
               `
               <div>
@@ -47,6 +49,7 @@ const PlacesBG = props => {
 
             if (infoWindowActive) {
               infoWindowActive.close();
+              infoWindowActive = null;
             }
 
             infowindow.open(props.map, _marker);
@@ -67,8 +70,10 @@ const PlacesBG = props => {
       }
     };
 
-    const service = new window.google.maps.places.PlacesService(props.map);
-    service.nearbySearch(request, callback);
+    businessTypes.forEach(_type => {
+      request.type = '_type';
+      service.nearbySearch(request, callback);
+    });
   };
 
   useEffect(() => {
