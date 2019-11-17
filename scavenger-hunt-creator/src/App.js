@@ -13,7 +13,11 @@ const App = props => {
     </Switch>
   );
 
-  return <Layout>{routes}</Layout>;
+  return (
+    <div>
+      <Layout>{routes}</Layout>
+    </div>
+  );
 };
 
 export default App;

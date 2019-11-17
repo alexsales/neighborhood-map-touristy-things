@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, Fragment } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import Places from './PlacesBG/PlacesBG';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ const MapBGNoLibrary = props => {
     });
 
     props.onMount && props.onMount(map);
-    props.onMapLoaded(map, otherProps.ref, true);
+    props.onMapLoaded(map, otherProps.ref, props.center);
   };
 
   useEffect(() => {
@@ -29,25 +29,56 @@ const MapBGNoLibrary = props => {
   return (
     <Fragment>
       <div {...otherProps} style={{ height: `calc(100vh - 60px)` }} />
-      {props.mapLoaded && <Places />}
+      {<Places />}
     </Fragment>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    places: state.mapReduce.mapPlaces,
-    center: state.mapReduce.mapCenter,
-    mapLoaded: state.mapReduce.mapLoaded
+    center: state.mapReduce.mapCenter
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMapLoaded: (map, mapRef, mapLoaded) => {
+    onMapLoaded: (map, mapRef, mapCenter) => {
       dispatch({
         type: 'MAPLOADED',
-        payload: { map, mapRef, mapLoaded }
+        payload: { map, mapRef }
+      });
+
+      const businessTypes = [
+        'amusement_park',
+        'art_gallery',
+        'bar',
+        'book_store',
+        'cafe',
+        'museum',
+        'tourist_attraction'
+      ];
+      const placeLocation = new window.google.maps.LatLng(mapCenter);
+
+      businessTypes.forEach(type => {
+        let request = {
+          location: placeLocation,
+          radius: '500',
+          type: ''
+        };
+
+        request.type = type;
+
+        (function(_type) {
+          new window.google.maps.places.PlacesService(map).nearbySearch(
+            request,
+            results => {
+              dispatch({
+                type: 'PLACESLOADED',
+                payload: results
+              });
+            }
+          );
+        })(request.type);
       });
     }
   };

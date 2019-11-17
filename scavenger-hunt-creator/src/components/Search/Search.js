@@ -6,6 +6,7 @@ import classes from './Search.module.css';
 const Search = props => {
   return (
     <div className={classes.Search}>
+      {/* <Backdrop /> */}
       <input
         type='text'
         onChange={props.onSetCenter}
@@ -52,7 +53,6 @@ const mapDispatchToProps = dispatch => {
         instanceGeocode
           .get(queryParams)
           .then(response => {
-            // console.log('response: ', response);
             dispatch({
               type: 'UPDATEMAP',
               payload: response
@@ -66,6 +66,40 @@ const mapDispatchToProps = dispatch => {
           });
       }
     }
+    // onMapLoaded: (map, mapRef) => {
+    //   dispatch({
+    //     type: 'MAPLOADED',
+    //     payload: { map, mapRef }
+    //   });
+
+    //   const businessTypes = ['art_gallery', 'book_store', 'cafe', 'museum'];
+    //   const placeLocation = new window.google.maps.LatLng({
+    //     lat: 34.1020231,
+    //     lng: -118.3409712
+    //   });
+
+    //   businessTypes.forEach(type => {
+    //     let request = {
+    //       location: placeLocation,
+    //       radius: '500',
+    //       type: ''
+    //     };
+
+    //     request.type = type;
+
+    //     (function(_type) {
+    //       new window.google.maps.places.PlacesService(map).nearbySearch(
+    //         request,
+    //         results => {
+    //           dispatch({
+    //             type: 'PLACESLOADED',
+    //             payload: results
+    //           });
+    //         }
+    //       );
+    //     })(request.type);
+    //   });
+    // }
   };
 };
 

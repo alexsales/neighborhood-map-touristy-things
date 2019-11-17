@@ -2,20 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 const PlacesBG = props => {
+  let infowindowActive = null;
   const onLoad = () => {
-    const placeLocation = new window.google.maps.LatLng(props.center);
-    const service = new window.google.maps.places.PlacesService(props.map);
-
-    const businessTypes = ['art_gallery', 'book_store', 'cafe', 'museum'];
-
-    let request = {
-      location: placeLocation,
-      radius: '500',
-      type: ''
-    };
-    let infoWindowActive = null;
-
-    const createMarker = (place, index) => {
+    props.places.forEach(place => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: place.geometry.location.lat(),
@@ -25,62 +14,72 @@ const PlacesBG = props => {
         title: place.name
       });
 
-      window.google.maps.event.addListener(
-        marker,
-        'click',
-        (function(_marker, _index) {
-          return () => {
-            const infowindow = new window.google.maps.InfoWindow({
-              maxWidth: 300
-            });
-            const basicInfo = {
-              name: place.name,
-              image: place.photos[0].getUrl()
-            };
+      // add listener and infoWindow
+      window.google.maps.event.addListener(marker, 'click', function() {
+        // close all existing windows
+        if (infowindowActive) {
+          infowindowActive.close();
+        }
 
-            infowindow.setContent(
-              `
-              <div>
-                <div>${basicInfo.name}</div>
-                <img src="${basicInfo.image}">
-              </div>
-              `
+        const infowindow = new window.google.maps.InfoWindow({
+          maxWidth: 300
+        });
+        const basicInfo = {
+          name: place.name,
+          image: place.photos ? place.photos[0].getUrl() : null
+        };
+        infowindow.setContent(
+          `<div>
+              <div>${basicInfo.name}</div>` +
+            (basicInfo.image !== null ? `<img src="${basicInfo.image}">` : '') +
+            `</div>`
+        );
+        infowindow.open(props.map, marker);
+        infowindowActive = infowindow;
+        infowindow.addListener(
+          'domready',
+          function() {
+            const imagesNode = document.querySelectorAll('.gm-style-iw img');
+            const imagesArr = [...imagesNode];
+            imagesArr.forEach(img => {
+              img.style.width = '100%';
+            });
+
+            const buttonsNode = document.querySelectorAll(
+              '.gm-style-iw button[title=Close]'
             );
-
-            if (infoWindowActive) {
-              infoWindowActive.close();
-              infoWindowActive = null;
-            }
-
-            infowindow.open(props.map, _marker);
-            infoWindowActive = infowindow;
-            infowindow.addListener('domready', function() {
-              console.log(
-                document.getElementsByClassName('gm-style-iw gm-style-iw-c')[0]
-              );
+            const buttonsArr = [...buttonsNode];
+            buttonsArr.forEach(btn => {
+              btn.style.display = 'none';
             });
-          };
-        })(marker, index)
-      );
-    };
 
-    const callback = (results, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        results.forEach(createMarker);
-      }
-    };
+            const imgContainersNode = document.querySelectorAll(
+              '.gm-style-iw-d'
+            );
+            const imgContainersArr = [...imgContainersNode];
+            imgContainersArr.forEach(cnt => {
+              cnt.style.overflow = 'unset';
+              cnt.style.overflowY = 'hidden';
+            });
 
-    businessTypes.forEach(_type => {
-      request.type = '_type';
-      service.nearbySearch(request, callback);
+            const iwContainersNode = document.querySelectorAll(
+              '.gm-style-iw-c'
+            );
+            const iwContainersArr = [...iwContainersNode];
+            iwContainersArr.forEach(iwCnt => {
+              iwCnt.style.padding = '12px';
+              iwCnt.style.height = 'auto';
+              iwCnt.style.boxSizing = 'content-box';
+            });
+          },
+          this
+        );
+      });
     });
   };
 
   useEffect(() => {
-    if (!window.google) {
-    } else {
-      onLoad();
-    }
+    onLoad();
   });
 
   return <p>Some places.</p>;
@@ -89,8 +88,6 @@ const PlacesBG = props => {
 const mapStateToProps = state => {
   return {
     map: state.mapReduce.map,
-    mapLoaded: state.mapReduce.mapLoaded,
-    center: state.mapReduce.mapCenter,
     places: state.mapReduce.mapPlaces
   };
 };

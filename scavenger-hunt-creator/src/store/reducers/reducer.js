@@ -6,12 +6,8 @@ const initialState = {
     lat: 34.1020231,
     lng: -118.3409712
   },
-  mapPlaces: [
-    { lat: 34.1009124, lng: -118.3366101 },
-    { lat: 34.1013773, lng: -118.3421319 },
-    { lat: 34.101324, lng: -118.3444815 },
-    { lat: 34.102947, lng: -118.342001 }
-  ],
+  mapPlaces: [],
+  mapMarkers: [],
   searchText: "e.g. '90004' or 'Los Angeles, CA'",
   searchboxClicked: false
 };
@@ -30,13 +26,14 @@ const reducer = (state = initialState, action) => {
         searchboxClicked: true
       };
     case 'UPDATEMAP':
-      console.log(action);
+      // console.log(action);
       const updatedMapCenter = {
         lat: action.payload.data.results[0].geometry.location.lat,
         lng: action.payload.data.results[0].geometry.location.lng
       };
       return {
         ...state,
+        mapPlaces: [],
         mapCenter: {
           ...state.mapCenter,
           ...updatedMapCenter
@@ -46,9 +43,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         map: action.payload.map,
-        mapRef: action.payload.mapRef,
-        mapLoaded: action.payload.mapLoaded
+        mapRef: action.payload.mapRef
       };
+    case 'PLACESLOADED':
+      const updatedMapPlaces = [...state.mapPlaces].concat(action.payload);
+      return {
+        ...state,
+        mapPlaces: updatedMapPlaces
+      };
+    // return state;
     default:
       return state;
   }
