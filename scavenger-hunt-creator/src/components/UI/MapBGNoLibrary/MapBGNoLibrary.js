@@ -8,10 +8,15 @@ const MapBGNoLibrary = props => {
     const map = new window.google.maps.Map(otherProps.ref.current, {
       center: props.center,
       zoom: 17
+      // zoomControl: false
+    });
+    const infowindow = new window.google.maps.InfoWindow({
+      maxWidth: 300
     });
 
     props.onMount && props.onMount(map);
     props.onMapLoaded(map, otherProps.ref, props.center);
+    props.onUpdateInfoWindow(infowindow);
   };
 
   useEffect(() => {
@@ -79,6 +84,12 @@ const mapDispatchToProps = dispatch => {
             }
           );
         })(request.type);
+      });
+    },
+    onUpdateInfoWindow: iw => {
+      dispatch({
+        type: 'UPDATEINFOWINDOW',
+        payload: iw
       });
     }
   };

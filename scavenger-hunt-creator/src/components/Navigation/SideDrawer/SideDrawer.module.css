@@ -1,2 +1,16 @@
 .SideDrawer {
+  width: calc(100% - 60px);
+  height: calc(30% - 61.5px);
+  background-color: rgba(145, 145, 145, 0.75);
+  position: absolute;
+  bottom: 23.5px;
+  z-index: 25;
+}
+
+.SideDrawer ul {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }

@@ -8,6 +8,8 @@ const initialState = {
   },
   mapPlaces: [],
   mapMarkers: [],
+  mapTextLinks: [],
+  infoWindow: null,
   searchText: "e.g. '90004' or 'Los Angeles, CA'",
   searchboxClicked: false
 };
@@ -26,7 +28,6 @@ const reducer = (state = initialState, action) => {
         searchboxClicked: true
       };
     case 'UPDATEMAP':
-      // console.log(action);
       const updatedMapCenter = {
         lat: action.payload.data.results[0].geometry.location.lat,
         lng: action.payload.data.results[0].geometry.location.lng
@@ -51,7 +52,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         mapPlaces: updatedMapPlaces
       };
-    // return state;
+    case 'UPDATEINFOWINDOW':
+      return {
+        ...state,
+        infoWindow: action.payload
+      };
     default:
       return state;
   }

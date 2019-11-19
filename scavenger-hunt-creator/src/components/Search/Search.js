@@ -59,7 +59,6 @@ const mapDispatchToProps = dispatch => {
             });
           })
           .catch(error => {
-            console.log('error: ', error);
             dispatch({
               type: 'UPDATEMAPFAILED'
             });
