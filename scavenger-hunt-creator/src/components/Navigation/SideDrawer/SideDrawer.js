@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import DrawerButton from './DrawerButton/DrawerButton';
 import classes from './SideDrawer.module.css';
 
 const SideDrawer = props => {
@@ -80,31 +81,17 @@ const SideDrawer = props => {
     );
   };
 
-  const namesArr = props.places
-    .map(place => {
-      return place.name;
-    })
-    .filter((item, index, arr) => arr.indexOf(item) === index);
-
-  const linksList = props.places.map((place, index) => {
-    if (namesArr.indexOf(place.name) >= 0) {
-      const nameArrIndex = namesArr.indexOf(place.name);
-      namesArr.splice(nameArrIndex, 1);
-      return (
-        <li key={index} onClick={e => onNameClickHandler(e, place, index)}>
-          {place.name}
-        </li>
-      );
-    }
-    return false;
-  });
+  const onHeartClick = (e, place, index) => {
+    console.log(e, place, index);
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   return (
     <Fragment>
       <div className={classes.SideDrawer}>
-        <ul>{linksList}</ul>
+        <DrawerButton click={onNameClickHandler} heartClick={onHeartClick} />
       </div>
-      {/* <Modal /> */}
     </Fragment>
   );
 };
