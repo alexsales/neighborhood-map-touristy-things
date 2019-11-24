@@ -47,7 +47,14 @@ const reducer = (state = initialState, action) => {
         mapRef: action.payload.mapRef
       };
     case 'PLACESLOADED':
-      const updatedMapPlaces = [...state.mapPlaces].concat(action.payload);
+      const tmpUpdatedMapPlaces = [...state.mapPlaces].concat(action.payload);
+
+      // remove duplicates
+      const updatedMapPlaces = tmpUpdatedMapPlaces.filter(
+        (item, index) => tmpUpdatedMapPlaces.indexOf(item) === index
+      );
+      // console.log(updatedMapPlaces);
+
       return {
         ...state,
         mapPlaces: updatedMapPlaces
@@ -56,6 +63,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         infoWindow: action.payload
+      };
+    case 'UPDATEPLACEITEM':
+      // set isFav property on place item
+      state.mapPlaces[action.payload[0]].isFav = action.payload[1];
+      return {
+        ...state,
+        // spread mapPlaces to copy all place items
+        // isolate and update single place item
+        mapPlaces: [...state.mapPlaces, state.mapPlaces[action.payload[0]]]
       };
     default:
       return state;

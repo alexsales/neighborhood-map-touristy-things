@@ -2,8 +2,25 @@ import React, { Fragment, useEffect, useRef } from 'react';
 import Places from './PlacesBG/PlacesBG';
 import { connect } from 'react-redux';
 
+// const useForceUpdate = () => {
+//   const [val, setVal] = useState(0);
+//   return () => setVal(val => ++val);
+// };
+
 const MapBGNoLibrary = props => {
   const otherProps = { ref: useRef(), className: props.className };
+  // const forceUpdate = useForceUpdate();
+
+  const onHeartFavToggle = (e, place, index) => {
+    console.log(e, place, index);
+    e.preventDefault();
+    e.stopPropagation();
+
+    place.isFav = !place.isFav;
+    console.log(place.isFav);
+    props.onUpdatePlaceItem(index, place.isFav);
+    // forceUpdate();
+  };
   const onLoad = () => {
     const map = new window.google.maps.Map(otherProps.ref.current, {
       center: props.center,
@@ -34,7 +51,7 @@ const MapBGNoLibrary = props => {
   return (
     <Fragment>
       <div {...otherProps} style={{ height: `calc(100vh - 60px)` }} />
-      {<Places />}
+      {<Places heartClick={onHeartFavToggle} />}
     </Fragment>
   );
 };
@@ -90,6 +107,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'UPDATEINFOWINDOW',
         payload: iw
+      });
+    },
+    onUpdatePlaceItem: (index, isFav) => {
+      dispatch({
+        type: 'UPDATEPLACEITEM',
+        payload: [index, isFav]
       });
     }
   };

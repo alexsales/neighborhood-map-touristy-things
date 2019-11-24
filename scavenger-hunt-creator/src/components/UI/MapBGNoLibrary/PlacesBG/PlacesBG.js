@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import heartInactive from '../../../../assets/heart-inactive-v3.svg';
+import heartActive from '../../../../assets/heart-active-v2.svg';
+import classes from './PlacesBG.module.css';
 
 const PlacesBG = props => {
   let infowindowActive = null;
-
   const onLoad = () => {
-    props.places.forEach(place => {
+    props.places.forEach((place, index) => {
       const mapIcon = {
         url:
           'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
@@ -34,27 +36,46 @@ const PlacesBG = props => {
           props.infowin.close();
         }
 
+        const whichHeartImg = place.isFav ? heartActive : heartInactive;
+
         const infowindow = props.infowin;
         const basicInfo = {
           name: place.name,
           image: place.photos ? place.photos[0].getUrl() : null
         };
+
         infowindow.setContent(
-          `<div>
-              <div>${basicInfo.name}</div>` +
-            (basicInfo.image !== null ? `<img src="${basicInfo.image}">` : '') +
+          `<div class=${classes.PlacesBG}>
+            <div>
+              <div class=${classes.iwPlaceName}>${basicInfo.name}</div>
+              <div class="${classes.iwHeart}">
+                <img src="${whichHeartImg}" class="heart-img">
+              </div>
+            </div>` +
+            (basicInfo.image !== null
+              ? `<div class="iw-place-img"><img src="${basicInfo.image}"></div>`
+              : '') +
             `</div>`
         );
         infowindow.open(props.map, marker);
         infowindowActive = infowindow;
-        infowindow.addListener(
+        const iwListener = infowindow.addListener(
           'domready',
           function() {
+            window.google.maps.event.removeListener(iwListener);
             const imagesNode = document.querySelectorAll('.gm-style-iw img');
             const imagesArr = [...imagesNode];
+
             imagesArr.forEach(img => {
               img.style.width = '100%';
             });
+
+            document
+              .getElementsByClassName('heart-img')[0]
+              .addEventListener('click', e => {
+                props.heartClick(e, place, index);
+                e.target.src = place.isFav ? heartActive : heartInactive;
+              });
 
             const buttonsNode = document.querySelectorAll(
               '.gm-style-iw button[title=Close]'

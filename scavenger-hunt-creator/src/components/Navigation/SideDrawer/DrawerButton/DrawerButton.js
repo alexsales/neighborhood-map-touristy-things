@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './DrawerButton.module.css';
 import { connect } from 'react-redux';
 import heartInactive from '../../../../assets/heart-inactive-v2.svg';
+import heartInactiveV3 from '../../../../assets/heart-inactive-v3.svg';
 import heartActive from '../../../../assets/heart-active-v2.svg';
 
 const DrawerButton = props => {
@@ -18,13 +19,23 @@ const DrawerButton = props => {
         <img
           src={heartActive}
           alt={`is a favorite: ${place.isFav}`}
-          onClick={e => props.heartClick(e, place, index)}
+          onClick={e => {
+            props.heartClick(e, place, index);
+            document.getElementsByClassName('heart-img2')[0].src = place.isFav
+              ? heartActive
+              : heartInactiveV3;
+          }}
         />
       ) : (
         <img
           src={heartInactive}
           alt={`is a favorite: ${place.isFav}`}
-          onClick={e => props.heartClick(e, place, index)}
+          onClick={e => {
+            props.heartClick(e, place, index);
+            document.getElementsByClassName('heart-img2')[0].src = place.isFav
+              ? heartActive
+              : heartInactiveV3;
+          }}
         />
       );
 
