@@ -1,0 +1,14 @@
+.Toolbar {
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  list-style-type: none;
+}
+
+.Toolbar li {
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  background-color: #ccc;
+}
