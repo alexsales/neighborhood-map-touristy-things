@@ -21,9 +21,16 @@ const DrawerButton = props => {
           alt={`is a favorite: ${place.isFav}`}
           onClick={e => {
             props.heartClick(e, place, index);
-            document.getElementsByClassName('heart-img2')[0].src = place.isFav
-              ? heartActive
-              : heartInactiveV3;
+            if (!!document.getElementsByClassName('heart-img2')[0] === true) {
+              document.getElementsByClassName('heart-img2')[0].src = place.isFav
+                ? heartActive
+                : heartInactiveV3;
+            }
+            if (!!document.getElementsByClassName('heart-img')[0] === true) {
+              document.getElementsByClassName('heart-img')[0].src = place.isFav
+                ? heartActive
+                : heartInactiveV3;
+            }
           }}
         />
       ) : (
@@ -32,9 +39,16 @@ const DrawerButton = props => {
           alt={`is a favorite: ${place.isFav}`}
           onClick={e => {
             props.heartClick(e, place, index);
-            document.getElementsByClassName('heart-img2')[0].src = place.isFav
-              ? heartActive
-              : heartInactiveV3;
+            if (!!document.getElementsByClassName('heart-img2')[0] === true) {
+              document.getElementsByClassName('heart-img2')[0].src = place.isFav
+                ? heartActive
+                : heartInactiveV3;
+            }
+            if (!!document.getElementsByClassName('heart-img')[0] === true) {
+              document.getElementsByClassName('heart-img')[0].src = place.isFav
+                ? heartActive
+                : heartInactiveV3;
+            }
           }}
         />
       );
