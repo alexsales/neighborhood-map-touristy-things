@@ -40,7 +40,7 @@ const MapBGNoLibrary = props => {
     if (!window.google) {
       const script = document.createElement(`script`);
       script.type = `text/javascript`;
-      script.src = `https://maps.google.com/maps/api/js?key=AIzaSyBSqWAWnXdkeCMI9gUZihf5WLVWQz-3UMA&libraries=places`;
+      script.src = `https://maps.google.com/maps/api/js?key=${process.env.REACT_APP_GMAPS_API_KEY}&libraries=places`;
       const headScript = document.getElementsByTagName(`script`)[0];
       headScript.parentNode.insertBefore(script, headScript);
       script.addEventListener(`load`, onLoad);
