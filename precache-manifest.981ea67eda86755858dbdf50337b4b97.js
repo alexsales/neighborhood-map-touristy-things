@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "913b57a5856fda18a621e414aff99d83",
+    "revision": "c5ed56a03eed0e65842b5e1b9e6795a2",
     "url": "/neighborhood-map-touristy-things/index.html"
   },
   {
-    "revision": "a03a410ef06a632f576a",
+    "revision": "04b51e7d9d4edf146ea8",
     "url": "/neighborhood-map-touristy-things/static/css/main.d4e77d6b.chunk.css"
   },
   {
-    "revision": "d2f783ab0ad07ed75f1f",
-    "url": "/neighborhood-map-touristy-things/static/js/2.d1c411db.chunk.js"
+    "revision": "9986a69ccbab0476e36a",
+    "url": "/neighborhood-map-touristy-things/static/js/2.d60371dd.chunk.js"
   },
   {
-    "revision": "a03a410ef06a632f576a",
-    "url": "/neighborhood-map-touristy-things/static/js/main.d7b0cb15.chunk.js"
+    "revision": "04b51e7d9d4edf146ea8",
+    "url": "/neighborhood-map-touristy-things/static/js/main.242fb369.chunk.js"
   },
   {
     "revision": "75b58fa3ce1d1271ddd6",
