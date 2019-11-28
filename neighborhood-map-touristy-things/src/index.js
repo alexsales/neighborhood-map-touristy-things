@@ -17,7 +17,7 @@ const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename={'/neighborhood-map-touristy-things/#'}>
       <App />
     </BrowserRouter>
   </Provider>,
