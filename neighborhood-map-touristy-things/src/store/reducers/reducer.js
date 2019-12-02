@@ -11,7 +11,9 @@ const initialState = {
   mapTextLinks: [],
   infoWindow: null,
   searchText: "e.g. '90004' or 'Los Angeles, CA'",
-  searchboxClicked: false
+  searchboxClicked: false,
+  showLogin: true,
+  showAuth: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -72,6 +74,16 @@ const reducer = (state = initialState, action) => {
         // spread mapPlaces to copy all place items
         // isolate and update single place item
         mapPlaces: [...state.mapPlaces, state.mapPlaces[action.payload[0]]]
+      };
+    case 'SHOWAUTH':
+      return {
+        ...state,
+        showAuth: action.payload
+      };
+    case 'SHOWLOGIN':
+      return {
+        ...state,
+        showLogin: action.payload
       };
     default:
       return state;
