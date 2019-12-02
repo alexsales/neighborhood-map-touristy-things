@@ -8,6 +8,7 @@ import MapBGNoLibrary from './components/UI/MapBGNoLibrary/MapBGNoLibrary';
 import './App.css';
 
 const App = props => {
+  // TODO: setup custom route components to handle conditional routing (especially or authentication)
   let routes = (
     <Switch>
       <Route path='/auth' component={Auth} />
