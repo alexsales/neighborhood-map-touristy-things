@@ -12,3 +12,21 @@
   margin: 10px 10px 10px 0;
   background-color: #ccc;
 }
+
+.Toolbar .faves {
+  background-color: #fff;
+  padding-top: 5px;
+  margin-right: 5px;
+}
+
+.Toolbar .faves img {
+  width: 120%;
+  transform: rotate(-3deg);
+  transition: width 0.5s ease-in, transform 0.75s;
+}
+
+.Toolbar .faves img:hover {
+  /* width: 135%; */
+  /* transform: center; */
+  transform: rotate(3deg) scale(1.35);
+}

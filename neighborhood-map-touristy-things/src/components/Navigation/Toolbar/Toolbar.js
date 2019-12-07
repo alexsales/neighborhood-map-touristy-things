@@ -1,40 +1,41 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classes from './Toolbar.module.css';
+import fav from '../../../assets/heart-active-v2.svg';
 
 const Toolbar = props => {
-  // const onOpenLogin = () => {
-  //   props.onShowAuth(true);
-  //   props.onShowLogin(false);
-  // };
-
-  // const onCloseLogin = () => {
-  //   onCloseAuth();
-  // };
   let showLoginLink = null;
-  // useEffect(() => {
-  // showLoginLink = onShowLoginLink();
-  //   console.log(showLoginLink);
-  // });
+  const [, setState] = useState();
+
+  const forceUpdate = () => {
+    setState({});
+  };
 
   const onShowLoginLink = () => {
-    // !window.location.hash.includes('auth') &&
-    // props.showLogin &&
-    // !props.showAuth ? (
     return !window.location.hash.includes('auth') ? (
-      // <li onClick={onOpenLogin}>
-      <li>
-        {/* <NavLink to='/auth' clickClose={onCloseLogin}> */}
-        {/* <NavLink to='/auth'>Login</NavLink> */}
-        <NavLink
-          to={{
-            pathname: '/auth',
-            showLogin: props.showLogin,
-            showAuth: props.showAuth
-          }}>
-          Login
-        </NavLink>
+      <li onClick={forceUpdate}>
+        {props.showLogin ? (
+          <NavLink
+            to={{
+              pathname: '/auth',
+              showLogin: props.showLogin,
+              showAuth: props.showAuth,
+              buttonName: 'login'
+            }}>
+            Login
+          </NavLink>
+        ) : (
+          <NavLink
+            to={{
+              pathname: '/auth',
+              showLogin: props.showLogin,
+              showAuth: props.showAuth,
+              buttonName: 'logout'
+            }}>
+            Logout
+          </NavLink>
+        )}
       </li>
     ) : (
       ''
@@ -45,8 +46,12 @@ const Toolbar = props => {
 
   return (
     <Fragment>
-      {/* <Backdrop /> */}
       <ul className={classes.Toolbar}>
+        <li className={classes.faves}>
+          <NavLink to='/faves'>
+            <img src={fav} alt='favorites link' />
+          </NavLink>
+        </li>
         {showLoginLink}
         <li>
           <NavLink to='/register'>Register</NavLink>
@@ -58,7 +63,8 @@ const Toolbar = props => {
 
 const mapStateToProps = state => {
   return {
-    showLogin: state.mapReduce.showLogin
+    showLogin: state.mapReduce.showLogin,
+    showLogout: state.mapReduce.showLogout
   };
 };
 
