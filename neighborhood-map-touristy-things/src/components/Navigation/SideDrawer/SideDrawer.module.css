@@ -36,3 +36,19 @@
 .SideDrawer ul li:active {
   background-color: rgba(145, 145, 145, 0.8);
 }
+
+.infoWin > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.infoWin .iwPlaceName {
+  flex-grow: 2;
+  flex-basis: 85%;
+}
+
+.infoWin .iwHeart {
+  width: 28px;
+}

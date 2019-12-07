@@ -1,15 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import DrawerButton from './DrawerButton/DrawerButton';
+import { instanceFirebase } from '../../../axios';
 import classes from './SideDrawer.module.css';
-// import heartInactive from '../../../assets/heart-inactive-v2.svg';
 import heartInactiveV3 from '../../../assets/heart-inactive-v3.svg';
 import heartActive from '../../../assets/heart-active-v2.svg';
 
 const SideDrawer = props => {
   let infowindowActive = null;
   const onNameClickHandler = (e, place, index) => {
-    console.log(e.target, index);
     const map = props.map;
     const marker = new window.google.maps.Marker({
       position: {
@@ -39,11 +38,14 @@ const SideDrawer = props => {
     };
 
     const whichHeartImg = place.isFav ? heartActive : heartInactiveV3;
+
     infowindow.setContent(
-      `<div>
-        <div>${basicInfo.name}</div>
-        <div class="${classes.iwHeart}">
-          <img src="${whichHeartImg}" class="heart-img2">
+      `<div class=${classes.infoWin}>
+        <div>
+          <div class=${classes.iwPlaceName}>${basicInfo.name}</div>
+          <div class="${classes.iwHeart}">
+            <img src="${whichHeartImg}" class="heart-img2">
+          </div>
         </div>` +
         (basicInfo.image !== null ? `<img src="${basicInfo.image}">` : '') +
         `</div>`
@@ -100,19 +102,54 @@ const SideDrawer = props => {
   };
 
   const onHeartClick = (e, place, index) => {
-    // console.log(e, place, index);
     e.preventDefault();
     e.stopPropagation();
 
     place.isFav = !place.isFav;
-    console.log(place.isFav);
+
+    if (place.isFav === true) {
+      // add to Faves in database using id, then update store's mapPlaces
+      instanceFirebase
+        .patch(
+          '/users/' +
+            localStorage.getItem('userId') +
+            `/faves-list/${place.place_id}.json`,
+          {
+            name: place.name,
+            address: place.vicinity,
+            placeId: place.place_id
+          }
+        )
+        .then(resp => {
+          props.onAddToFaves(resp.data);
+        });
+    }
+
+    if (place.isFav === false) {
+      // delete from Faves in database using id, then update store's mapPlaces
+      const idToDelete = place.place_id;
+      instanceFirebase
+        .delete(
+          '/users/' +
+            localStorage.getItem('userId') +
+            `/faves-list/${place.place_id}.json`
+        )
+        .then(resp => {
+          props.onDeleteFromFaves(idToDelete);
+        });
+    }
+
     props.onUpdatePlaceItem(index, place.isFav);
   };
 
   return (
     <Fragment>
       <div className={classes.SideDrawer}>
-        <DrawerButton click={onNameClickHandler} heartClick={onHeartClick} />
+        <DrawerButton
+          mapPlaces={props.places}
+          click={onNameClickHandler}
+          heartClick={onHeartClick}
+        />
       </div>
     </Fragment>
   );
@@ -138,6 +175,18 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'UPDATEPLACEITEM',
         payload: [index, isFav]
+      });
+    },
+    onAddToFaves: userData => {
+      dispatch({
+        type: 'ADDTOFAVES',
+        payload: userData
+      });
+    },
+    onDeleteFromFaves: idToDelete => {
+      dispatch({
+        type: 'DELETEFROMFAVES',
+        payload: idToDelete
       });
     }
   };

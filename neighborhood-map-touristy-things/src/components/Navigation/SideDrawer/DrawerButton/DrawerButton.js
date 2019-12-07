@@ -7,13 +7,16 @@ import heartActive from '../../../../assets/heart-active-v2.svg';
 
 const DrawerButton = props => {
   const namesArr = props.places
+    .filter((place, index, arr) => {
+      return place !== null;
+    })
     .map(place => {
       return place.name;
     })
     .filter((item, index, arr) => arr.indexOf(item) === index);
 
   const linksList = props.places.map((place, index) => {
-    if (namesArr.indexOf(place.name) >= 0) {
+    if (place !== null && namesArr.indexOf(place.name) >= 0) {
       const nameArrIndex = namesArr.indexOf(place.name);
       const whichHeartImg = place.isFav ? (
         <img
