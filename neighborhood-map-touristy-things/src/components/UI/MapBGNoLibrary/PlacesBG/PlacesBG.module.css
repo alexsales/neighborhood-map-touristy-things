@@ -1,9 +1,4 @@
 .PlacesBG > div:first-child {
-  /* height: 45px; */
-  /* width: 100%;
-  margin-right: 5px;
-  margin-bottom: 10px;
-  float: left; */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -11,21 +6,10 @@
 }
 
 .PlacesBG .iwPlaceName {
-  /* width: 75%;
-  float: left;
-  position: relative;
-  top: 5px; */
   flex-grow: 2;
   flex-basis: 85%;
 }
 
 .PlacesBG .iwHeart {
-  /* width: 28px;
-  float: right;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  transform: rotate(15deg); */
-  /* margin-bottom: 5px; */
   width: 28px;
 }

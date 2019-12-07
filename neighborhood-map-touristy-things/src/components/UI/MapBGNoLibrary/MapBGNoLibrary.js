@@ -1,31 +1,54 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 import Places from './PlacesBG/PlacesBG';
 import { connect } from 'react-redux';
-
-// const useForceUpdate = () => {
-//   const [val, setVal] = useState(0);
-//   return () => setVal(val => ++val);
-// };
+import { instanceFirebase } from '../../../axios';
 
 const MapBGNoLibrary = props => {
   const otherProps = { ref: useRef(), className: props.className };
-  // const forceUpdate = useForceUpdate();
-
   const onHeartFavToggle = (e, place, index) => {
-    console.log(e, place, index);
     e.preventDefault();
     e.stopPropagation();
 
     place.isFav = !place.isFav;
-    console.log(place.isFav);
+
+    if (place.isFav === true) {
+      // add to Faves in database using id, then update store's mapPlaces
+      instanceFirebase
+        .patch(
+          '/users/' +
+            localStorage.getItem('userId') +
+            `/faves-list/${place.place_id}.json`,
+          {
+            name: place.name,
+            address: place.vicinity,
+            placeId: place.place_id
+          }
+        )
+        .then(resp => {
+          props.onAddToFaves(resp.data);
+        });
+    }
+
+    if (place.isFav === false) {
+      // delete from Faves in database using id, then update store's mapPlaces
+      const idToDelete = place.place_id;
+      instanceFirebase
+        .delete(
+          '/users/' +
+            localStorage.getItem('userId') +
+            `/faves-list/${place.place_id}.json`
+        )
+        .then(resp => {
+          props.onDeleteFromFaves(idToDelete);
+        });
+    }
+
     props.onUpdatePlaceItem(index, place.isFav);
-    // forceUpdate();
   };
   const onLoad = () => {
     const map = new window.google.maps.Map(otherProps.ref.current, {
       center: props.center,
       zoom: 17
-      // zoomControl: false
     });
     const infowindow = new window.google.maps.InfoWindow({
       maxWidth: 300
@@ -51,7 +74,7 @@ const MapBGNoLibrary = props => {
   return (
     <Fragment>
       <div {...otherProps} style={{ height: `calc(100vh - 60px)` }} />
-      {<Places heartClick={onHeartFavToggle} />}
+      <Places heartClick={onHeartFavToggle} />
     </Fragment>
   );
 };
@@ -113,6 +136,18 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'UPDATEPLACEITEM',
         payload: [index, isFav]
+      });
+    },
+    onAddToFaves: userData => {
+      dispatch({
+        type: 'ADDTOFAVES',
+        payload: userData
+      });
+    },
+    onDeleteFromFaves: idToDelete => {
+      dispatch({
+        type: 'DELETEFROMFAVES',
+        payload: idToDelete
       });
     }
   };
