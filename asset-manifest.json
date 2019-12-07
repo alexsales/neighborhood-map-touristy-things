@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/neighborhood-map-touristy-things/static/css/main.d4e77d6b.chunk.css",
-    "main.js": "/neighborhood-map-touristy-things/static/js/main.8b593e31.chunk.js",
-    "main.js.map": "/neighborhood-map-touristy-things/static/js/main.8b593e31.chunk.js.map",
+    "main.css": "/neighborhood-map-touristy-things/static/css/main.9e24cfc3.chunk.css",
+    "main.js": "/neighborhood-map-touristy-things/static/js/main.1aa0249e.chunk.js",
+    "main.js.map": "/neighborhood-map-touristy-things/static/js/main.1aa0249e.chunk.js.map",
     "runtime-main.js": "/neighborhood-map-touristy-things/static/js/runtime-main.a136d090.js",
     "runtime-main.js.map": "/neighborhood-map-touristy-things/static/js/runtime-main.a136d090.js.map",
-    "static/js/2.d1c411db.chunk.js": "/neighborhood-map-touristy-things/static/js/2.d1c411db.chunk.js",
-    "static/js/2.d1c411db.chunk.js.map": "/neighborhood-map-touristy-things/static/js/2.d1c411db.chunk.js.map",
+    "static/js/2.ef11abee.chunk.js": "/neighborhood-map-touristy-things/static/js/2.ef11abee.chunk.js",
+    "static/js/2.ef11abee.chunk.js.map": "/neighborhood-map-touristy-things/static/js/2.ef11abee.chunk.js.map",
     "index.html": "/neighborhood-map-touristy-things/index.html",
-    "precache-manifest.79cd123f9a8abeb1818ab523ca942309.js": "/neighborhood-map-touristy-things/precache-manifest.79cd123f9a8abeb1818ab523ca942309.js",
+    "precache-manifest.7bc18e33cf393c86c8fec03a47f2c8e9.js": "/neighborhood-map-touristy-things/precache-manifest.7bc18e33cf393c86c8fec03a47f2c8e9.js",
     "service-worker.js": "/neighborhood-map-touristy-things/service-worker.js",
-    "static/css/main.d4e77d6b.chunk.css.map": "/neighborhood-map-touristy-things/static/css/main.d4e77d6b.chunk.css.map",
+    "static/css/main.9e24cfc3.chunk.css.map": "/neighborhood-map-touristy-things/static/css/main.9e24cfc3.chunk.css.map",
+    "static/media/close-24px.svg": "/neighborhood-map-touristy-things/static/media/close-24px.777b93c6.svg",
     "static/media/heart-active-v2.svg": "/neighborhood-map-touristy-things/static/media/heart-active-v2.be2c63a1.svg",
     "static/media/heart-inactive-v2.svg": "/neighborhood-map-touristy-things/static/media/heart-inactive-v2.0e1f1f09.svg",
     "static/media/heart-inactive-v3.svg": "/neighborhood-map-touristy-things/static/media/heart-inactive-v3.0e0abb7f.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a136d090.js",
-    "static/js/2.d1c411db.chunk.js",
-    "static/css/main.d4e77d6b.chunk.css",
-    "static/js/main.8b593e31.chunk.js"
+    "static/js/2.ef11abee.chunk.js",
+    "static/css/main.9e24cfc3.chunk.css",
+    "static/js/main.1aa0249e.chunk.js"
   ]
 }
