@@ -1,4 +1,13 @@
+/* .Auth {
+  position: absolute;
+  z-index: 50;
+} */
+
 .Auth {
   position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 25%;
   z-index: 50;
 }

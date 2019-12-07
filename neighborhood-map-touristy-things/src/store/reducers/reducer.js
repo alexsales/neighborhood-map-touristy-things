@@ -13,7 +13,12 @@ const initialState = {
   searchText: "e.g. '90004' or 'Los Angeles, CA'",
   searchboxClicked: false,
   showLogin: true,
-  showAuth: false
+  showLogout: false,
+  showAuth: false,
+  userId: '',
+  userToken: null,
+  userFirebaseData: null,
+  userFaves: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,10 +57,11 @@ const reducer = (state = initialState, action) => {
       const tmpUpdatedMapPlaces = [...state.mapPlaces].concat(action.payload);
 
       // remove duplicates
-      const updatedMapPlaces = tmpUpdatedMapPlaces.filter(
-        (item, index) => tmpUpdatedMapPlaces.indexOf(item) === index
-      );
-      // console.log(updatedMapPlaces);
+      const updatedMapPlaces = tmpUpdatedMapPlaces
+        .filter((place, index, arr) => {
+          return place !== null;
+        })
+        .filter((place, index) => tmpUpdatedMapPlaces.indexOf(place) === index);
 
       return {
         ...state,
@@ -84,6 +90,75 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         showLogin: action.payload
+      };
+    case 'SHOWLOGOUT':
+      return {
+        ...state,
+        showLogout: action.payload
+      };
+    case 'FIREBASEAUTHENTICATE':
+      return {
+        ...state,
+        userId: action.userId,
+        userToken: action.token
+      };
+    case 'CLEARUSERTOKEN':
+      return {
+        ...state,
+        mapPlaces: [],
+        userId: '',
+        userToken: null,
+        showLogin: true,
+        showLogout: false,
+        showAuth: false,
+        userFirebaseData: null,
+        userFaves: []
+      };
+    case 'LOADUSERDATA':
+      const email = action.payload.email;
+      const firstName = action.payload['first-name'];
+      const lastName = action.payload['last-name'];
+
+      return {
+        ...state,
+        userFirebaseData: { email, firstName, lastName }
+      };
+    case 'LOADUSERFAVES':
+      let tmpFavesArr = null;
+
+      if (action.payload['faves-list']) {
+        tmpFavesArr = Object.keys(action.payload['faves-list']).map(
+          (key, index) => {
+            return action.payload['faves-list'][key];
+          }
+        );
+      }
+      return {
+        ...state,
+        userFaves: tmpFavesArr
+      };
+    case 'ADDTOFAVES':
+      const placeId = action.payload.placeId;
+
+      let tmpAddToFavesArr = [];
+      state.userFaves.forEach((fave, index) => {
+        if (fave.placeId !== placeId) {
+          tmpAddToFavesArr.push(fave);
+        }
+      });
+
+      return {
+        ...state,
+        userFaves: [...tmpAddToFavesArr, action.payload]
+      };
+    case 'DELETEFROMFAVES':
+      const updatedFavesArrDelete = state.userFaves.filter((item, index) => {
+        return state.userFaves[index].placeId !== action.payload;
+      });
+
+      return {
+        ...state,
+        userFaves: updatedFavesArrDelete
       };
     default:
       return state;
