@@ -1,8 +1,42 @@
 .Faves .favesList {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 25%;
   width: 50%;
-  height: 25%;
+  height: 65%;
   z-index: 50;
+}
+
+.Faves .favesList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: calc(100% - 4.3em);
+}
+
+.Faves .favesList li {
+  position: relative;
+  padding: 10px;
+  background-color: #ccc;
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+
+.Faves .favesList li:last-of-type {
+  margin-bottom: 0;
+}
+
+.Faves .favesList li:hover {
+  background-color: #aaa;
+}
+
+.Faves .favesList li:hover::after {
+  position: absolute;
+  content: 'X';
+  top: 0;
+  padding: 2% 4%;
+  right: 0;
+  background-color: lightblue;
+  cursor: pointer;
 }
