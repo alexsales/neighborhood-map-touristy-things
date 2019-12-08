@@ -117,6 +117,12 @@ const Auth = props => {
 
   let formContents = (
     <>
+      <h2>Login</h2>
+      <p className={classes.testLoginInfo}>
+        <span>test login:</span>
+        <span>asales2005@gmail.com</span>
+        <span>abc123</span>
+      </p>
       <div>
         <label>
           <input

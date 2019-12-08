@@ -5,9 +5,17 @@
 
 .Auth {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 25%;
   width: 50%;
-  height: 25%;
+  height: 65%;
   z-index: 50;
+}
+
+.Auth .testLoginInfo {
+  font-style: italic;
+}
+
+.Auth .testLoginInfo span {
+  display: block;
 }
