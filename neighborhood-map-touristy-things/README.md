@@ -12,11 +12,13 @@ The Neighborhood Map Tourist Attractions (NMTA) application helps visitors ident
 ## Tools / Techniques
 
 - ReactJS (a frontend library)
+- create-react-app CLI tool
 - React Hooks (a React version 16.8+ feature)
 - Redux (to manage application state)
 - NPM (a package manager)
 - Firebase API (Authentication API, Realtime Database API)
 - Google Maps / Places API
+- GitHub Pages (for hosting a demo of the application)
 - ES6
 - Functional Programming
 - Object-Oriented JavaScript
