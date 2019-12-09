@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NEIGHBORHOOD MAP TOURIST ATTRACTIONS (Galleries, Museums, and Points of Interest)
 
-## Available Scripts
+## Summary
 
-In the project directory, you can run:
+The Neighborhood Map Tourist Attractions (NMTA) application helps visitors identify local galleries, museums, amusement parks, and other attractions, using the Google Maps API and Google Places. Users can search within a specific geographical area and save/delete multiple points of interest.
 
-### `npm start`
+## Links to GitHub Repository (Master Branch)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- GitHub Project Repository: [https://github.com/alexsales/neighborhood-map-touristy-things/](https://github.com/alexsales/neighborhood-map-touristy-things/ 'GitHub project repository')
+- GitHub Pages Demo: [https://alexsales.github.io/neighborhood-map-touristy-things/](https://alexsales.github.io/neighborhood-map-touristy-things/ 'GitHub Pages demo')
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Tools / Techniques
 
-### `npm test`
+- ReactJS (a frontend library)
+- React Hooks (a React version 16.8+ feature)
+- Redux (to manage application state)
+- NPM (a package manager)
+- Firebase API (Authentication API, Realtime Database API)
+- Google Maps / Places API
+- ES6
+- Functional Programming
+- Object-Oriented JavaScript
+- Media Queries and Responsive Web Design
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## List of Resources
 
-### `npm run build`
+[https://firebase.google.com/docs/guides/](https://firebase.google.com/docs/guides/ 'Firebase documentation and guides')  
+[https://reactjs.org/docs/hooks-reference.html](https://reactjs.org/docs/hooks-reference.html 'React Hooks docs')  
+[https://github.com/alexsales/frontend-nanodegree-neighborhood-map-project/](https://github.com/alexsales/frontend-nanodegree-neighborhood-map-project/ 'Neighborhood Maps Project')  
+[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ 'MDN - reference for JS object and array methods')  
+[https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d/](https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d/ 'Deploying React to GitHub Pages')
+[https://blog.bloomca.me/2017/12/15/how-to-push-folder-to-github-pages.html](https://blog.bloomca.me/2017/12/15/how-to-push-folder-to-github-pages.html 'Pushing to GitHub Pages')
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Project Requirements
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## How do I complete this project?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Review JavaScript design patterns and object-oriented JavaScript.
+- Review the React and Redux libraries.
+- Review and implement Google Maps, Google Places, Firebase, and Axios using their respective API's.
+- Add map markers of interesting locations in the neighborhood.
+- Implement a list view of the identified locations.
+- Implememt User login and registration pages (where users can login using a demo account).
+- Allow users to save/delete/toggle their favorite tourist attractions.
+- Use Firebase's Realtime Database to allow for the storing and retrieving of saved favorites.
